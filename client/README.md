@@ -1,22 +1,13 @@
-# client
+client
 
-> My ace Nuxt.js project
+Frontend made using nuxt and vue.js
 
-## Build Setup
+It implements:
 
-```bash
-# install dependencies
-$ npm install
+• Authentication
 
-# serve with hot reload at localhost:3000
-$ npm run dev
+• Shopping cart
 
-# build for production and launch server
-$ npm run build
-$ npm run start
+• Payment using stripe (test mode, no charge will be made)
 
-# generate static project
-$ npm run generate
-```
-
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+• Review / rating sections
