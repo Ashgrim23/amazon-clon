@@ -1,7 +1,7 @@
 {
   "name": "client",
   "version": "1.0.0",
-  "description": "My ace Nuxt.js project",
+  "description": "Amazon-clone",
   "author": "Ashgrim",
   "private": true,
   "scripts": {

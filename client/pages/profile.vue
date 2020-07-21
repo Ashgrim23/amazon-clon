@@ -13,13 +13,13 @@
                 <!-- nombre -->
               <div class="a-spacing-top-medium">
                 <label>Name</label>
-                <input class="a-input-text" type="text" style="width:100%" v-model="data.name" :placeholder="this.$auth.user.name">
+                <input class="a-input-text" type="text" style="width:100%" v-model="data.name" :placeholder="loggedInUser.name">
               </div>
 
               <!-- email -->
               <div class="a-spacing-top-medium">
                 <label>Email</label>
-                <input class="a-input-text" type="text" style="width:100%" v-model="data.email" :placeholder="this.$auth.user.email">
+                <input class="a-input-text" type="text" style="width:100%" v-model="data.email" :placeholder="loggedInUser.email">
               </div>
 
                 <!-- password -->
@@ -51,7 +51,7 @@
 <script>
 import {mapGetters} from "vuex"
 export default {    
-   middleware:["auth"],
+   middleware:"auth",
   data() {
     return {   
         data:{     
@@ -62,7 +62,7 @@ export default {
     };
   },
   computed:{
-    ...mapGetters(["getCart","getCartLength"])
+    ...mapGetters(["getCart","getCartLength","loggedInUser","isAuthenticated"])
   },
   methods:{
       async onUpdateProfile(){

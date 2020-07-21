@@ -39,7 +39,7 @@
 
               <!-- Error message  -->
               <div class="a-section a-spacing-none a-spacing-top-small">
-                <div v-if="!$auth.$state.user.address" class="alert alert-danger" role="alert">you must add a shipping address!</div>
+                <div v-if="!loggedInUser.address" class="alert alert-danger" role="alert">you must add a shipping address!</div>
               </div>
               <form action="#" method="post">
                 <div class="a-spacing-medium a-spacing-top-medium">
@@ -93,7 +93,7 @@ export default {
         }
     },
     computed:{
-      ...mapGetters(["getCart","getCartTotalPriceWithShipping","getEstimatedDelivery","getCartTotalPrice","getShippingPrice"])
+      ...mapGetters(["getCart",'loggedInUser',"getCartTotalPriceWithShipping","getEstimatedDelivery","getCartTotalPrice","getShippingPrice"])
     },
     mounted(){
         this.stripe=Stripe("pk_test_51GxweQCxDlJpJGh371q9We1Qts1JxmAmB8L6FHIeFv9jgjcr9MMyiNeJbZGuUkZZntsm7FZDjbsQOMf1tdmObbpc00I3wUogUf")

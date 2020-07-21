@@ -1,7 +1,7 @@
 {
   "name": "admin",
   "version": "1.0.0",
-  "description": "My polished Nuxt.js project",
+  "description": "Amazon-clone admin site",
   "author": "Ashgrim",
   "private": true,
   "scripts": {

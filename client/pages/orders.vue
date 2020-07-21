@@ -78,7 +78,7 @@
                     <br />
                     <!-- Owner's name -->
                     <a href class="a-size-base font-weight-bold a-link-normal">
-                      {{$auth.$state.user.name}}
+                      {{loggedInUser.name}}
                       <i class="far fa-chevron-down"></i>
                     </a>
                   </div>
@@ -158,6 +158,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import moment from 'moment'
 export default {
     middleware:"auth",
@@ -176,6 +177,8 @@ export default {
       formatDate(date){
         return moment(date).format("dddd MMMM Do, yyyy")
       }
-    }
+    },computed: {
+    ...mapGetters(['isAuthenticated','loggedInUser'])
+  }
 }
 </script>

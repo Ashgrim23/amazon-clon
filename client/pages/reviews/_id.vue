@@ -81,7 +81,7 @@
                   <img src="/img/avatar.png" class="img-fluid" style="width: 50px;">
                 </div>
                 <div class="media-body pl-3 pt-2">
-                  <input type="text" class="a-input-text" style="width: 100%;" :value="$auth.$state.user.name">
+                  <input type="text" class="a-input-text" style="width: 100%;" :value="loggedInUser.name">
                 </div>
               </div>
             </div>
@@ -108,6 +108,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import StarRating from "vue-star-rating";
 export default {
   middleware:["auth"],
@@ -160,6 +161,9 @@ export default {
         console.log(error);
       }
     }
+  },
+  computed: {
+    ...mapGetters(['loggedInUser'])
   }
 };
 </script>

@@ -31,14 +31,14 @@
                     <div class="a-row">
                       <div class="displayAddressDiv">
                         <!-- User's address -->
-                        <ul v-if="$auth.$state.user.address" class="displayAddressUL">
-                          <li>{{$auth.$state.user.address.fullName}}</li>
-                          <li>{{$auth.$state.user.address.streetAddress}}</li>
-                          <li>{{$auth.$state.user.address.city}}</li>
-                          <li>{{$auth.$state.user.address.country}}</li>
+                        <ul v-if="loggedInUser.address" class="displayAddressUL">
+                          <li>{{loggedInUser.address.fullName}}</li>
+                          <li>{{loggedInUser.address.streetAddress}}</li>
+                          <li>{{loggedInUser.address.city}}</li>
+                          <li>{{loggedInUser.address.country}}</li>
                           <li>
                             Phone:
-                            <span dir="ltr">{{$auth.$state.user.address.phoneNumber}}</span>
+                            <span dir="ltr">{{loggedInUser.address.phoneNumber}}</span>
                           </li>
                         </ul>
                       </div>
@@ -214,10 +214,10 @@
             <div class="a-box a-first">
               <div class="a-box-inner">
                 <div class="a-row a-spacing-micro" >
-                  <nuxt-link  to="/payment" :event="$auth.$state.user.address ? 'click' : ''">
+                  <nuxt-link  to="/payment" :event="loggedInUser.address ? 'click' : ''">
                     <span  class="a-button-place-order">Place your order in USD</span>
                   </nuxt-link>
-                  <div v-if="!$auth.$state.user.address" class="alert alert-danger" role="alert">you must add a shipping address!</div>
+                  <div v-if="!loggedInUser.address" class="alert alert-danger" role="alert">you must add a shipping address!</div>
                 </div>
                 <div class="a-row a-spacing-small a-size-small a-text-center">
                   By placing your order, you agree to Amazon's
@@ -361,7 +361,7 @@
 <script>
 import {mapGetters} from "vuex"
 export default {
-  middleware:["auth"],
+  middleware:"auth",
   async asyncData({$axios,store}){
       try {
           let response =await $axios.$post('/api/shipment',{shipment:"normal"})
@@ -378,7 +378,7 @@ export default {
   },
   layout: "none",
   computed:{
-      ...mapGetters(["getCart","getCartTotalPrice","getCartTotalPriceWithShipping"])
+      ...mapGetters(["getCart","getCartTotalPrice","getCartTotalPriceWithShipping","isAuthenticated", "loggedInUser"])
   },
   methods:{
       async onChooseShipping(shipment){

@@ -26,7 +26,7 @@
                 <div class="nav-sprite" id="nav-packard-glow-loc-icon"></div>
                 <div id="glow-ingress-block">                  
                   <span class="nav-line-1" id="glow-ingress-line1">Deliver to</span>
-                  <span v-if="this.$auth.loggedIn && this.$auth.user.address" class="nav-line-2" id="glow-ingress-line2">{{this.$auth.user.address.city}}</span>
+                  <span v-if="isAuthenticated && loggedInUser.address" class="nav-line-2" id="glow-ingress-line2">{{loggedInUser.address.city}}</span>
                 </div>
               </nuxt-link>
             </div>
@@ -74,11 +74,11 @@
                     </a>
                     <span class="icp-nav-link-border"></span>
                     
-                    <template v-if="this.$auth.loggedIn">
+                    <template v-if="isAuthenticated">
                       <nuxt-link to='/profile' class="nav-a nav-a-2" id="nav-link-accountList" tabindex="0">
                         <span class="nav-line-1">Hello,</span>
                          <span class="nav-line-2">                                
-                                {{this.$auth.user.name}} 
+                                {{loggedInUser.name}} 
                             </span>
                       </nuxt-link>
                     </template>
@@ -122,7 +122,7 @@ export default {
         Search
     },
     computed:{      
-      ...mapGetters(["getCartLength"])
+      ...mapGetters(["getCartLength","loggedInUser","isAuthenticated"])
     }
     
 };

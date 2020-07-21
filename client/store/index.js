@@ -113,7 +113,14 @@ export const getters={
     },
     getEstimatedDelivery(state){
         return state.shippingEstimatedDelivery
-    }
+    },
+    isAuthenticated(state) {
+        return state.auth.loggedIn
+      },
+    
+      loggedInUser(state) {
+        return state.auth.user
+      }
     
 }
 
