@@ -1,7 +1,11 @@
-import createPersistedState from 'vuex-persistedstate'
+import createPersistedState from "vuex-persistedstate";
 
-export default({store})=>{
-    window.onNuxtReady(()=>{
-        createPersistedState({})(store)
-    })
+export default ({store, isHMR}) => {
+  if (isHMR) return
+
+  
+    window.onNuxtReady(() => {
+      createPersistedState({})(store);
+    });
+  
 }

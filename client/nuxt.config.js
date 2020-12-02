@@ -1,11 +1,14 @@
+import TerserPlugin from 'terser-webpack-plugin'
 const URL="http://localhost:3001"
+
+
 export default {
-  mode: 'spa',
-  target: 'static',
+  mode: 'universal',
   server: {
     port: 9000, // default: 3000
     host: '0.0.0.0' // default: localhost
-  },  
+  },
+  target: 'server',  
   /*
   ** Headers of the page
   */
@@ -37,6 +40,7 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [{src:"~plugins/localStorage.js",ssr:false}],
+  
   /*
   ** Nuxt.js dev-modules
   */
@@ -75,8 +79,15 @@ export default {
     }
   },
   auth:{    
+    cookie: false,
+    redirect: {
+      login: '/login',
+      logout: '/',
+      callback: '/login',
+      home: '/'
+    },
     strategies:{
-      local:{
+      local:{        
         endpoints:{
           login:{
             propertyName:"token"

@@ -71,7 +71,7 @@
 </template>
 
 <script>
-
+import { mapGetters } from 'vuex'
 export default {
   middleware: "auth",
   auth: "guest",
@@ -91,13 +91,16 @@ export default {
         });        
           let tmpCart=await this.$axios.get('/api/cart')               
           this.$store.commit("setCart",tmpCart.data.cart)
-          this.$router.push("/");
+          //this.$router.go("/");
         
       } catch (error) {
         console.log(error);
         this.error="Authentication failed"
       }
     }
+  },
+  computed: {
+    ...mapGetters(['isAuthenticated','loggedInUser'])
   }
 };
 </script>

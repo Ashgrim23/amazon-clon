@@ -1,5 +1,5 @@
 <template>
-  <main>    
+  <main>
     <div class="container-fluid c-section">
       <div class="row">
         <div class="col-sm-3"></div>
@@ -7,28 +7,40 @@
           <div class="a-section">
             <div class="a-spacing-top-medium"></div>
 
-            <h2 >Profile Page</h2>
+            <h2>Profile Page</h2>
             <a href="#" @click="onLogout">Logout</a>
             <form>
-                <!-- nombre -->
+              <!-- nombre -->
               <div class="a-spacing-top-medium">
                 <label>Name</label>
-                <input class="a-input-text" type="text" style="width:100%" v-model="data.name" :placeholder="loggedInUser.name">
+                <input
+                  class="a-input-text"
+                  type="text"
+                  style="width:100%"
+                  v-model="data.name"
+                  :placeholder="loggedInUser.name"
+                >
               </div>
 
               <!-- email -->
               <div class="a-spacing-top-medium">
                 <label>Email</label>
-                <input class="a-input-text" type="text" style="width:100%" v-model="data.email" :placeholder="loggedInUser.email">
+                <input
+                  class="a-input-text"
+                  type="text"
+                  style="width:100%"
+                  v-model="data.email"
+                  :placeholder="loggedInUser.email"
+                >
               </div>
 
-                <!-- password -->
+              <!-- password -->
               <div class="a-spacing-top-medium">
                 <label>Password</label>
                 <input class="a-input-text" type="text" style="width:100%" v-model="data.password">
               </div>
-              
-              <hr>              
+
+              <hr>
               <!-- button -->
               <div class="a-spacing-top-large">
                 <span class="a-button-register">
@@ -38,8 +50,7 @@
                 </span>
               </div>
             </form>
-            <br/>
-          
+            <br>
           </div>
         </div>
         <div class="col-sm-3"></div>
@@ -49,45 +60,47 @@
 </template>
 
 <script>
-import {mapGetters} from "vuex"
-export default {    
-   middleware:"auth",
+import { mapGetters } from "vuex";
+export default {
+  middleware: "auth",
   data() {
-    return {   
-        data:{     
-            name:"",
-            email:"",
-            password:""
-        }
+    return {
+      data: {
+        name: "",
+        email: "",
+        password: ""
+      }
     };
   },
-  computed:{
-    ...mapGetters(["getCart","getCartLength","loggedInUser","isAuthenticated"])
+  computed: {
+    ...mapGetters([
+      "getCart",
+      "getCartLength",
+      "loggedInUser",
+      "isAuthenticated"
+    ])
   },
-  methods:{
-      async onUpdateProfile(){
-        
-          try {
-              let response =await this.$axios.$put("/api/auth/user",this.data)
-              if (response.success){
-                this.data.name="";
-                this.data.email="";
-                this.data.password="";
-                await this.$auth.fetchUser();
-              }
-          } catch (error) {
-              console.log(error)
-          }
-      },
-      async onLogout(){              
-          
-            let response = await this.$axios.post("/api/cart",this.getCart)
-          
-          await this.$auth.logout()          
-          this.$store.commit("clearCart")          
+  methods: {
+    async onUpdateProfile() {
+      try {
+        let response = await this.$axios.$put("/api/auth/user", this.data);
+        if (response.success) {
+          this.data.name = "";
+          this.data.email = "";
+          this.data.password = "";
+          await this.$auth.fetchUser();
+        }
+      } catch (error) {
+        console.log(error);
       }
+    },
+    async onLogout() {
+      let response = await this.$axios.post("/api/cart", this.getCart);
+      await this.$auth.logout();
+      this.$axios.setHeader('Authorization', null)
+      this.$store.commit("clearCart");
+    }
   }
-
 };
 </script>
 

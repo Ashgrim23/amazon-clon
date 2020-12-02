@@ -161,7 +161,7 @@
 import { mapGetters } from 'vuex'
 import moment from 'moment'
 export default {
-    middleware:"auth",
+    middleware:'auth',
     async asyncData({$axios}){
         try {
             let response =await $axios.$get("/api/orders")
