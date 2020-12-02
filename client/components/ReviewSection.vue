@@ -22,7 +22,7 @@
                 :star-size="18"
                 :star-points="[23,2,14,17,0,19,10,34,7,50,23,43,38,50,36,34,46,19,31,17]">
               </star-rating>            
-            </no-ssr>            
+            </no-ssr>             
             <span >
               <a href="#">
                 {{product.statsRating[0]}} out of 5 stars
@@ -348,7 +348,7 @@ import StarRating from "vue-star-rating"
 export default {
     props:["product","reviews"],
     components:{
-      StarRating
+  //    StarRating
     }
 };
 </script>

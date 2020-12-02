@@ -30,7 +30,7 @@
                 <!-- Rating -->
                 <no-ssr>
                   <star-rating v-model="rating"></star-rating>
-                </no-ssr>
+                </no-ssr> 
               </div>
               <div class="a-row a-spacing-top-large">
                 <h2>Add photo or video</h2>
@@ -113,7 +113,7 @@ import StarRating from "vue-star-rating";
 export default {
   middleware:["auth"],
   components: {
-    StarRating
+  //  StarRating
   },
   async asyncData({ $axios, params }) {
     try {

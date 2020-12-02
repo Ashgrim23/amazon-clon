@@ -1,14 +1,13 @@
 import TerserPlugin from 'terser-webpack-plugin'
 const URL="http://localhost:3001"
 
-
 export default {
   mode: 'universal',
   server: {
     port: 9000, // default: 3000
     host: '0.0.0.0' // default: localhost
   },
-  target: 'server',  
+  //target: 'server',  
   /*
   ** Headers of the page
   */

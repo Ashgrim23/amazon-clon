@@ -19,7 +19,8 @@
     "bootstrap-vue": "^2.0.0",
     "moment": "^2.27.0",
     "nuxt": "^2.13.3",
-    "vue-star-rating": "^1.6.1",
+    "terser-webpack-plugin": "^5.0.3",
+    "vue-star-rating": "1.6.2",
     "vuex-persistedstate": "^3.0.1"
   },
   "devDependencies": {}

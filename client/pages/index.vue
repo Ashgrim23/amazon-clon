@@ -92,7 +92,7 @@
                             <div class="col-sm-5">
                               <div class="a-row a-spacing-mini">
                                 <!-- star rating -->
-                                <no-ssr>                                  
+                                 <no-ssr>                                  
                                   <star-rating 
                                     :rating="parseInt(product.statsRating[0])" 
                                     :round-start-rating="false"
@@ -104,7 +104,7 @@
                                     :star-size="18"
                                     :star-points="[23,2,14,17,0,19,10,34,7,50,23,43,38,50,36,34,46,19,31,17]">
                                   </star-rating>
-                                </no-ssr>
+                                </no-ssr> 
                               </div>
                             </div>
                           </div>
@@ -139,7 +139,7 @@ export default {
   },
   components: {
     FeaturedProduct,
-    StarRating
+   // StarRating
   }
 };
 </script>
