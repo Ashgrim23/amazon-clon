@@ -39,7 +39,7 @@
 
               <!-- Error message  -->
               <div class="a-section a-spacing-none a-spacing-top-small">
-                <div v-if="!loggedInUser.address" class="alert alert-danger" role="alert">you must add a shipping address!</div>
+                <div v-if="!usuario.address" class="alert alert-danger" role="alert">you must add a shipping address!</div>
               </div>
               <form action="#" method="post">
                 <div class="a-spacing-medium a-spacing-top-medium">
@@ -84,7 +84,7 @@
 <script>
 import {mapGetters} from "vuex"
 export default {
-  middleware:["auth"],    
+  middleware:["authen"],    
     data() {
         return {
             error:"",
@@ -93,7 +93,10 @@ export default {
         }
     },
     computed:{
-      ...mapGetters(["getCart",'loggedInUser',"getCartTotalPriceWithShipping","getEstimatedDelivery","getCartTotalPrice","getShippingPrice"])
+      usuario: function() {
+        return this.$store.state.auth.user        
+      },
+      ...mapGetters(["getCart","getCartTotalPriceWithShipping","getEstimatedDelivery","getCartTotalPrice","getShippingPrice"])
     },
     mounted(){
         this.stripe=Stripe("pk_test_51GxweQCxDlJpJGh371q9We1Qts1JxmAmB8L6FHIeFv9jgjcr9MMyiNeJbZGuUkZZntsm7FZDjbsQOMf1tdmObbpc00I3wUogUf")
@@ -103,7 +106,7 @@ export default {
     },
     methods:{
       async onPurchase(){
-        if (!this.$auth.$state.user.address) 
+        if (!this.$store.state.auth.user.address) 
           return 
         try {
           let token=await this.stripe.createToken(this.card)

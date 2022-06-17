@@ -30,7 +30,7 @@
                   <label for="ap-customer-name" class="a-form-label">Password</label>
                   <input
                     type="password"
-                    id="ap_customer_name"
+                    id="ap_customer_password"
                     class="a-input-text form-control auth-autofocus auth-required-field auth-contact-verification-request-info"
                     v-model="password"
                   >
@@ -73,8 +73,7 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
-  middleware: "auth",
-  auth: "guest",
+  middleware: ['visita'],
   layout: "none",
   data() {
     return {
@@ -91,16 +90,12 @@ export default {
         });        
           let tmpCart=await this.$axios.get('/api/cart')               
           this.$store.commit("setCart",tmpCart.data.cart)
-          //this.$router.go("/");
         
       } catch (error) {
         console.log(error);
         this.error="Authentication failed"
       }
     }
-  },
-  computed: {
-    ...mapGetters(['isAuthenticated','loggedInUser'])
   }
 };
 </script>

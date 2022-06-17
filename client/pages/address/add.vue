@@ -179,6 +179,7 @@
 
 <script>
 export default {
+  middleware:['authen'],
   async asyncData({$axios}){
     try {
       let response=await $axios.$get("/api/countries")
@@ -206,7 +207,6 @@ export default {
     };
   },
   methods: {
-    middleware:"auth",
     async onAddAddress() {
         try {
             let response =await this.$axios.$post("/api/address",this.data)    

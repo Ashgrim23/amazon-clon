@@ -88,7 +88,7 @@
                             
                             <div class="reviewGroup">
                                  <no-ssr>
-                                  <star-rating 
+                                  <StarRating
                                     :rating="parseInt(product.statsRating[0])" 
                                     :show-rating="false" 
                                     :glow="1" 
@@ -357,7 +357,7 @@ import ReviewSection from "~/components/ReviewSection"
 export default {
     components:{
         ReviewSection,
-   //     StarRating
+        StarRating
     },
  async asyncData({$axios,params}){     
      try {         

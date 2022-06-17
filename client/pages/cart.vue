@@ -198,8 +198,9 @@
 <script>
 import {mapGetters} from "vuex"
 export default {
+  middleware: ['authen'],
   computed:{
-    ...mapGetters(["getCart","getCartTotalPrice","getCartLength","isAuthenticated","loggedInUser"])
+    ...mapGetters(["getCart","getCartTotalPrice","getCartLength"])
   },
   methods:{
     onChangeQuantity(event,product){

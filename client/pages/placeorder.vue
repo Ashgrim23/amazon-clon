@@ -31,14 +31,14 @@
                     <div class="a-row">
                       <div class="displayAddressDiv">
                         <!-- User's address -->
-                        <ul v-if="loggedInUser.address" class="displayAddressUL">
-                          <li>{{loggedInUser.address.fullName}}</li>
-                          <li>{{loggedInUser.address.streetAddress}}</li>
-                          <li>{{loggedInUser.address.city}}</li>
-                          <li>{{loggedInUser.address.country}}</li>
+                        <ul v-if="usuario.address" class="displayAddressUL">
+                          <li>{{usuario.address.fullName}}</li>
+                          <li>{{usuario.address.streetAddress}}</li>
+                          <li>{{usuario.address.city}}</li>
+                          <li>{{usuario.address.country}}</li>
                           <li>
                             Phone:
-                            <span dir="ltr">{{loggedInUser.address.phoneNumber}}</span>
+                            <span dir="ltr">{{usuario.address.phoneNumber}}</span>
                           </li>
                         </ul>
                       </div>
@@ -214,10 +214,10 @@
             <div class="a-box a-first">
               <div class="a-box-inner">
                 <div class="a-row a-spacing-micro" >
-                  <nuxt-link  to="/payment" :event="loggedInUser.address ? 'click' : ''">
+                  <nuxt-link  to="/payment" :event="usuario.address ? 'click' : ''">
                     <span  class="a-button-place-order">Place your order in USD</span>
                   </nuxt-link>
-                  <div v-if="!loggedInUser.address" class="alert alert-danger" role="alert">you must add a shipping address!</div>
+                  <div v-if="!usuario.address" class="alert alert-danger" role="alert">you must add a shipping address!</div>
                 </div>
                 <div class="a-row a-spacing-small a-size-small a-text-center">
                   By placing your order, you agree to Amazon's
@@ -361,7 +361,7 @@
 <script>
 import {mapGetters} from "vuex"
 export default {
-  middleware:"auth",
+  middleware: ["authen"],
   async asyncData({$axios,store}){
       try {
           let response =await $axios.$post('/api/shipment',{shipment:"normal"})
@@ -378,7 +378,10 @@ export default {
   },
   layout: "none",
   computed:{
-      ...mapGetters(["getCart","getCartTotalPrice","getCartTotalPriceWithShipping","isAuthenticated", "loggedInUser"])
+    usuario: function() {
+      return this.$store.state.auth.user 
+    },
+      ...mapGetters(["getCart","getCartTotalPrice","getCartTotalPriceWithShipping"])
   },
   methods:{
       async onChooseShipping(shipment){

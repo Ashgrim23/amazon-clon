@@ -71,8 +71,7 @@
 <script>
 
 export default {
-      middleware:"auth",
-    auth:"guest",
+    middleware: ['visita'],
     layout:"none",
     data(){
         return {name:"",
@@ -87,14 +86,15 @@ export default {
                     email:this.email,
                     password:this.password                    
                 }
-                let response=await this.$axios.$post("/api/auth/signup",data)                
+                let response=await this.$axios.$post("/api/auth/signup",data)     
+                
                 if (response.success){
                     
                     await this.$auth.loginWith("local",{
                        data:{ email:this.email,
                         password:this.password}
                     })
-                    this.$router.push("/")
+                   // this.$router.push("/")
                 }
             } catch (error) {
                 console.log(error)

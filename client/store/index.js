@@ -8,6 +8,10 @@ export const state=()=>({
 })
 
 export const actions={
+    async nuxtServerInit ({ commit }, { req }) {
+        let auth = null
+        console.log(req.headers.cookie)        
+      },
     addProductToCart({state,commit},data) {        
         const cartProduct=state.cart.find(prod=>prod._id===data.product._id)       
         if (!cartProduct){
@@ -116,13 +120,13 @@ export const getters={
     getEstimatedDelivery(state){
         return state.shippingEstimatedDelivery
     },
+    /*
     isAuthenticated(state) {
         return state.auth.loggedIn
-      },
-    
-      loggedInUser(state) {
+    },
+    loggedInUser(state) {
         return state.auth.user
-      }
-    
+    }
+    */    
 }
 

@@ -18,7 +18,7 @@
                   type="text"
                   style="width:100%"
                   v-model="data.name"
-                  :placeholder="loggedInUser.name"
+                  :placeholder="usuario.name"
                 >
               </div>
 
@@ -30,7 +30,7 @@
                   type="text"
                   style="width:100%"
                   v-model="data.email"
-                  :placeholder="loggedInUser.email"
+                  :placeholder="usuario.email"
                 >
               </div>
 
@@ -62,7 +62,7 @@
 <script>
 import { mapGetters } from "vuex";
 export default {
-  middleware: "auth",
+  middleware: ['authen'],
   data() {
     return {
       data: {
@@ -73,12 +73,12 @@ export default {
     };
   },
   computed: {
+    usuario: function() {
+      return  this.$store.state.auth.user
+    },
     ...mapGetters([
       "getCart",
-      "getCartLength",
-      "loggedInUser",
-      "isAuthenticated"
-    ])
+      "getCartLength",])
   },
   methods: {
     async onUpdateProfile() {
@@ -99,6 +99,7 @@ export default {
       await this.$auth.logout();
       this.$axios.setHeader('Authorization', null)
       this.$store.commit("clearCart");
+      
     }
   }
 };

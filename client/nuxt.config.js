@@ -1,5 +1,6 @@
 import TerserPlugin from 'terser-webpack-plugin'
-const URL="http://localhost:3001"
+
+
 
 export default {
   mode: 'universal',
@@ -7,7 +8,6 @@ export default {
     port: 9000, // default: 3000
     host: '0.0.0.0' // default: localhost
   },
-  //target: 'server',  
   /*
   ** Headers of the page
   */
@@ -62,13 +62,16 @@ export default {
   */
   axios: {
     proxy: true,
-    baseURL:URL
+    baseURL:"http://amazon-backend:3001",   
+    browserBaseURL: "http://localhost:4001"
+
   },
   proxy:{
-    "/api":URL
+    "/api": "http://amazon-backend:3001"
+
   },
-  /*
-  ** Build configuration
+  /** 
+   Build configuration
   */
   build: {
     /*
@@ -78,22 +81,23 @@ export default {
     }
   },
   auth:{    
-    cookie: false,
+    strategies: {
+      local:{
+        endpoints: {
+          login:{
+            propertyName:"token"
+          },
+          logout:true
+        }
+      }
+    },
     redirect: {
       login: '/login',
       logout: '/',
       callback: '/login',
       home: '/'
-    },
-    strategies:{
-      local:{        
-        endpoints:{
-          login:{
-            propertyName:"token"
-          },
-          logout:true
-        }        
-      }
     }
-  }
+  },
+
+  
 }

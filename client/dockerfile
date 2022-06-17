@@ -1,0 +1,16 @@
+## BUILDER
+FROM node:15 AS build
+WORKDIR /home/node/app
+COPY ./ ./
+RUN npm install
+RUN npm run build
+
+
+## IMAGEN
+FROM node:16-alpine3.15
+WORKDIR /home/node/app
+COPY package.json ./
+COPY package-lock.json ./
+COPY --from=build /home/node/app/.nuxt/ ./.nuxt
+COPY --from=build /home/node/app/static/ ./static
+RUN npm ci --only=production

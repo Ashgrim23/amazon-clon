@@ -29,7 +29,7 @@
               <div class="a-row">
                 <!-- Rating -->
                 <no-ssr>
-                  <star-rating v-model="rating"></star-rating>
+                  <StarRating v-model="rating"></StarRating>
                 </no-ssr> 
               </div>
               <div class="a-row a-spacing-top-large">
@@ -81,7 +81,7 @@
                   <img src="/img/avatar.png" class="img-fluid" style="width: 50px;">
                 </div>
                 <div class="media-body pl-3 pt-2">
-                  <input type="text" class="a-input-text" style="width: 100%;" :value="loggedInUser.name">
+                  <input type="text" class="a-input-text" style="width: 100%;" :value="usuario.name">
                 </div>
               </div>
             </div>
@@ -108,12 +108,12 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+
 import StarRating from "vue-star-rating";
 export default {
-  middleware:["auth"],
+  middleware:['authen'],
   components: {
-  //  StarRating
+    StarRating
   },
   async asyncData({ $axios, params }) {
     try {
@@ -163,7 +163,10 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['loggedInUser'])
+    usuario: function() {
+      return this.$store.state.auth.user
+    }
+    
   }
 };
 </script>

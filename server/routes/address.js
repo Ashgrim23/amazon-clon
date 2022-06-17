@@ -55,7 +55,7 @@ router.get("/address",verifyToken,async (req,res)=>{
 
 router.get("/countries",async (req,res)=>{
     try {
-        let response= await axios.get("https://restcountries.eu/rest/v2/all")
+        let response= await axios.get("https://restcountries.com/v2/all")
         res.json(response.data)
     } catch (error) {
         res.status(500).json({

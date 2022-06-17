@@ -78,7 +78,7 @@
                     <br />
                     <!-- Owner's name -->
                     <a href class="a-size-base font-weight-bold a-link-normal">
-                      {{loggedInUser.name}}
+                      {{usuario.name}}
                       <i class="far fa-chevron-down"></i>
                     </a>
                   </div>
@@ -158,10 +158,10 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+
 import moment from 'moment'
 export default {
-    middleware:'auth',
+    middleware:['authen'],
     async asyncData({$axios}){
         try {
             let response =await $axios.$get("/api/orders")
@@ -178,7 +178,9 @@ export default {
         return moment(date).format("dddd MMMM Do, yyyy")
       }
     },computed: {
-    ...mapGetters(['isAuthenticated','loggedInUser'])
+      usuario: function(){
+        return this.$store.state.auth.user
+      }
   }
 }
 </script>

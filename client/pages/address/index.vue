@@ -94,8 +94,9 @@
 </template>
 
 <script>
+
 export default {
-  middleware:"auth",
+  
   async asyncData({$axios}){
     try {
       let response=await $axios.$get("/api/address")
@@ -107,6 +108,7 @@ export default {
       console.log(error)
     }
   },
+  middleware: ['authen'],
   data(){
     return {
       message:""
